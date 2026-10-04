@@ -1,0 +1,21 @@
+<MudMenu AnchorOrigin="Origin.BottomRight"
+         Color="Color.Default"
+         Dense="true"
+         EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
+         Label="@Valor"
+         StartIcon="@Icons.Material.Outlined.CalendarMonth"
+         TransformOrigin="Origin.TopRight"
+         Variant="Variant.Outlined">
+    @foreach (var opcao in DashboardData.Periodos)
+    {
+        <MudMenuItem OnClick="() => Selecionar(opcao)">@opcao</MudMenuItem>
+    }
+</MudMenu>
+
+@code {
+    // Contrato do @bind-Valor: parametro "Valor" + evento "ValorChanged".
+    [Parameter] public string Valor { get; set; } = DashboardData.Periodos[1];
+    [Parameter] public EventCallback<string> ValorChanged { get; set; }
+
+    private Task Selecionar(string opcao) => ValorChanged.InvokeAsync(opcao);
+}

@@ -1,0 +1,29 @@
+<MudPaper Class="pa-4 d-flex flex-column" Elevation="1" Height="100%">
+    <MudStack AlignItems="AlignItems.Start" Class="mb-2" Row="true">
+        <div class="flex-grow-1">
+            <MudText Typo="Typo.h6">@Titulo</MudText>
+            @if (!string.IsNullOrEmpty(Subtitulo))
+            {
+                <MudText Class="mud-text-secondary" Typo="Typo.body2">@Subtitulo</MudText>
+            }
+        </div>
+        @Acoes
+        @if (Menu is not null)
+        {
+            <MudMenu Dense="true" Icon="@Icons.Material.Filled.MoreVert" Size="Size.Small">
+                @Menu
+            </MudMenu>
+        }
+    </MudStack>
+    <div class="flex-grow-1 d-flex flex-column">
+        @ChildContent
+    </div>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired] public string Titulo { get; set; } = "";
+    [Parameter] public string? Subtitulo { get; set; }
+    [Parameter] public RenderFragment? Acoes { get; set; }
+    [Parameter] public RenderFragment? Menu { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
