@@ -1,6 +1,6 @@
 <MudStack AlignItems="AlignItems.Center" Class="mb-4" Justify="Justify.SpaceBetween" Row="true" Wrap="Wrap.Wrap">
     <div>
-        <MudText Tag="h1" Typo="Typo.h5">@Titulo</MudText>
+        <MudText HtmlTag="h1" Typo="Typo.h5">@Titulo</MudText>
         @if (!string.IsNullOrEmpty(Subtitulo))
         {
             <MudText Class="mud-text-secondary" Typo="Typo.body2">@Subtitulo</MudText>
