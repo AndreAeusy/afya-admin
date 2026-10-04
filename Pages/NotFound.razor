@@ -1,5 +1,11 @@
-﻿@page "/not-found"
+@page "/not-found"
 @layout MainLayout
 
-<h3>Not Found</h3>
-<p>Sorry, the content you are looking for does not exist.</p>
+<MudContainer Class="py-8" MaxWidth="MaxWidth.Small">
+    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+        <MudIcon Color="Color.Warning" Icon="@Icons.Material.Filled.SearchOff" Size="Size.Large"/>
+        <MudText Tag="h1" Typo="Typo.h5">Página não encontrada</MudText>
+        <MudText Class="mud-text-secondary" Typo="Typo.body1">Não há nada neste endereço.</MudText>
+        <MudButton Color="Color.Primary" Href="/" Variant="Variant.Filled">Voltar ao Dashboard</MudButton>
+    </MudStack>
+</MudContainer>

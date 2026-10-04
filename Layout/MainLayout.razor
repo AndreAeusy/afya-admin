@@ -1,16 +1,79 @@
-﻿@inherits LayoutComponentBase
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@inherits LayoutComponentBase
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+<MudThemeProvider @bind-IsDarkMode="_modoEscuro" Theme="_tema"/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Color="Color.Inherit" Edge="Edge.Start" Icon="@Icons.Material.Filled.Menu" OnClick="AlternarMenu"/>
+        <MudIcon Class="ml-2" Color="Color.Primary" Icon="@Icons.Material.Filled.MonitorHeart"/>
+        <MudText Class="ml-2" Typo="Typo.h6">Afya Admin</MudText>
+        <MudSpacer/>
+        <MudIconButton Color="Color.Inherit"
+                       Icon="@(_modoEscuro ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)"
+                       OnClick="AlternarTema"/>
+        <MudBadge Color="Color.Error" Content="3" Overlap="true">
+            <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Outlined.Notifications"/>
+        </MudBadge>
+        <MudStack AlignItems="AlignItems.Center" Class="ml-3 d-none d-sm-flex" Row="true" Spacing="2">
+            <MudAvatar Size="Size.Medium">
+                <MudImage Alt="Alex Morgan" Src="img/alex-morgan.jpg"/>
+            </MudAvatar>
+            <div>
+                <MudText Typo="Typo.subtitle2">Alex Morgan</MudText>
+                <MudText Class="mud-text-secondary" Typo="Typo.caption">Administrador</MudText>
+            </div>
+        </MudStack>
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_menuAberto" Breakpoint="Breakpoint.Lg" ClipMode="DrawerClipMode.Always" Elevation="0" Variant="DrawerVariant.Responsive">
+        <NavMenu/>
+    </MudDrawer>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _menuAberto = true;
+    private bool _modoEscuro;
+
+    // Todo o visual centralizado aqui: paletas (claro/escuro), fonte e raio de borda.
+    private readonly MudTheme _tema = new()
+    {
+        PaletteLight = new PaletteLight
+        {
+            Primary = "#2563EB",
+            Secondary = "#7C3AED",
+            Success = "#108981",
+            Info = "#3882F6",
+            Warning = "#F97316",
+            Background = "#F4F6FA",
+            Surface = "#FFFFFF",
+            AppbarBackground = "#FFFFFF",
+            AppbarText = "#1F2937",
+            DrawerBackground = "#FFFFFF",
+            HoverOpacity = 0.12
+        },
+        PaletteDark = new PaletteDark
+        {
+            Primary = "#60A5FA",
+            Secondary = "#A78BFA",
+            Success = "#34D399",
+            Info = "#60A5FA",
+            Warning = "#FB923C",
+            HoverOpacity = 0.16
+        },
+        LayoutProperties = new LayoutProperties { DefaultBorderRadius = "12px" },
+        Typography = new Typography
+        {
+            Default = new DefaultTypography { FontFamily = new[] { "Inter", "Roboto", "Helvetica", "Arial", "sans-serif" } }
+        }
+    };
+
+    private void AlternarMenu() => _menuAberto = !_menuAberto;
+    private void AlternarTema() => _modoEscuro = !_modoEscuro;
+}
