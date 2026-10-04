@@ -1,0 +1,44 @@
+<DashboardCard Subtitulo="Acompanhe o andamento dos projetos" Titulo="Projetos Recentes">
+    <Acoes>
+        <MudButton Color="Color.Primary" Size="Size.Small" Variant="Variant.Outlined">Ver todos</MudButton>
+    </Acoes>
+    <ChildContent>
+        <MudTable Breakpoint="Breakpoint.Sm" Dense="true" Elevation="0" Hover="true" Items="DashboardData.ProjetosRecentes">
+            <HeaderContent>
+                <MudTh>Projeto</MudTh>
+                <MudTh>Cliente</MudTh>
+                <MudTh>Responsável</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh>Progresso</MudTh>
+                <MudTh>Prazo</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Projeto">
+                    <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="2">
+                        <MudAvatar Class="@Ui.FundoSuave(context.Cor)" Size="Size.Small">
+                            <MudIcon Color="@context.Cor" Icon="@context.Icone" Size="Size.Small"/>
+                        </MudAvatar>
+                        <MudText Typo="Typo.subtitle2">@context.Nome</MudText>
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="Cliente">@context.Cliente</MudTd>
+                <MudTd DataLabel="Responsável">
+                    <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="2">
+                        <MudAvatar Color="Color.Primary" Size="Size.Small">@Ui.Iniciais(context.Responsavel)</MudAvatar>
+                        <MudText Typo="Typo.body2">@context.Responsavel</MudText>
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="Status">
+                    <MudChip Color="@context.StatusCor" Size="Size.Small" T="string" Variant="Variant.Text">@context.Status</MudChip>
+                </MudTd>
+                <MudTd DataLabel="Progresso">
+                    <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="2">
+                        <MudProgressLinear Class="flex-grow-1" Color="@context.StatusCor" Rounded="true" Value="@context.Progresso"/>
+                        <MudText Typo="Typo.caption">@context.Progresso%</MudText>
+                    </MudStack>
+                </MudTd>
+                <MudTd DataLabel="Prazo">@context.Prazo</MudTd>
+            </RowTemplate>
+        </MudTable>
+    </ChildContent>
+</DashboardCard>

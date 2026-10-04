@@ -1,0 +1,21 @@
+<DashboardCard Subtitulo="Últimas ações da equipe" Titulo="Atividades Recentes">
+    <Acoes>
+        <MudButton Color="Color.Primary" Size="Size.Small" Variant="Variant.Text">Ver tudo</MudButton>
+    </Acoes>
+    <ChildContent>
+        <MudStack Spacing="3">
+            @foreach (var atividade in DashboardData.Atividades)
+            {
+                <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="3">
+                    <MudAvatar Class="@Ui.FundoSuave(atividade.Cor)" Size="Size.Medium">
+                        <MudIcon Color="@atividade.Cor" Icon="@atividade.Icone" Size="Size.Small"/>
+                    </MudAvatar>
+                    <div>
+                        <MudText Typo="Typo.body2"><strong>@atividade.Nome</strong> @atividade.Acao</MudText>
+                        <MudText Class="mud-text-secondary" Typo="Typo.caption">@atividade.Tempo</MudText>
+                    </div>
+                </MudStack>
+            }
+        </MudStack>
+    </ChildContent>
+</DashboardCard>

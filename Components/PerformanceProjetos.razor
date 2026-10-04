@@ -1,0 +1,22 @@
+<DashboardCard Subtitulo="Progresso das tarefas por projeto" Titulo="Performance de Projetos">
+    <MudStack Spacing="4">
+        @foreach (var projeto in DashboardData.Performance)
+        {
+            <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="3">
+                <MudAvatar Class="@Ui.FundoSuave(projeto.Cor)" Size="Size.Medium">
+                    <MudIcon Color="@projeto.Cor" Icon="@projeto.Icone"/>
+                </MudAvatar>
+                <div class="flex-grow-1">
+                    <MudStack Justify="Justify.SpaceBetween" Row="true">
+                        <MudText Typo="Typo.subtitle2">@projeto.Nome</MudText>
+                        <MudText Typo="Typo.subtitle2">@projeto.Percentual%</MudText>
+                    </MudStack>
+                    <MudProgressLinear Class="my-1" Color="@projeto.Cor" Rounded="true" Size="Size.Medium" Value="@projeto.Percentual"/>
+                    <MudText Class="mud-text-secondary" Typo="Typo.caption">
+                        @projeto.TarefasConcluidas de @projeto.TarefasTotal tarefas concluídas
+                    </MudText>
+                </div>
+            </MudStack>
+        }
+    </MudStack>
+</DashboardCard>
