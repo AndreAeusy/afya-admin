@@ -25,13 +25,17 @@ afya-admin/
 
 ## Telas
 
-| Tema claro | Tema escuro |
-| --- | --- |
-| ![Tema claro](docs/prints/tema-claro.png) | ![Tema escuro](docs/prints/tema-escuro.png) |
+### Tema Claro
+![Tema Claro](docs/prints/tema-claro.png)
 
-| Mobile | DevTools |
-| --- | --- |
-| ![Mobile](docs/prints/mobile.png) | ![DevTools](docs/prints/devtools.png) |
+### Tema Escuro
+![Tema Escuro](docs/prints/tema-escuro.png)
+
+### Mobile
+![Mobile](docs/prints/mobile.png)
+
+### DevTools
+![DevTools](docs/prints/devtools.png)
 
 ## O que aprendi
 
