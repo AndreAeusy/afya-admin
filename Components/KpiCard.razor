@@ -1,0 +1,54 @@
+<MudPaper Class="pa-4" Elevation="1" Height="100%">
+    <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="3">
+        <MudAvatar Class="@Ui.FundoSuave(Kpi.Cor)" Size="Size.Large">
+            <MudIcon Color="@Kpi.Cor" Icon="@Kpi.Icone"/>
+        </MudAvatar>
+        <div>
+            <MudText Class="mud-text-secondary" Typo="Typo.body2">@Kpi.Titulo</MudText>
+            <MudText Typo="Typo.h5">@Kpi.Valor</MudText>
+        </div>
+    </MudStack>
+    <MudStack AlignItems="AlignItems.End" Class="mt-2" Justify="Justify.SpaceBetween" Row="true">
+        <div>
+            <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="1">
+                <MudIcon Color="@CorTendencia" Icon="@(Kpi.Positivo ? Icons.Material.Filled.TrendingUp : Icons.Material.Filled.TrendingDown)" Size="Size.Small"/>
+                <MudText Color="@CorTendencia" Typo="Typo.h6">@Kpi.Variacao</MudText>
+            </MudStack>
+            <MudText Class="mud-text-secondary" Typo="Typo.caption">comparado ao mês anterior</MudText>
+        </div>
+        <MudChart ChartLabels="_rotulos" ChartOptions="_opcoes" ChartSeries="_series" ChartType="ChartType.Line" Height="50px" T="double" Width="110px"/>
+    </MudStack>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired] public Kpi Kpi { get; set; } = default!;
+
+    private List<ChartSeries<double>> _series = new();
+    private string[] _rotulos = Array.Empty<string>();
+    private LineChartOptions _opcoes = new();
+
+    private Color CorTendencia => Kpi.Positivo ? Color.Success : Color.Error;
+
+    protected override void OnParametersSet()
+    {
+        var serie = new ChartSeries<double> { Name = Kpi.Titulo, Data = Kpi.Tendencia };
+        _series = new() { serie };
+        _rotulos = Enumerable.Repeat("", Kpi.Tendencia.Length).ToArray();
+
+        _opcoes = new LineChartOptions
+        {
+            ChartPalette = new[] { Kpi.CorHex },
+            ShowLegend = false,
+            ShowToolTips = false,
+            YAxisLines = false,
+            XAxisLines = false,
+            YAxisToStringFunc = _ => "",
+            YAxisRequireZeroPoint = false,
+            LineStrokeWidth = 12,
+            SeriesDisplayOverrides = new Dictionary<IChartSeries, MudBlazor.Charts.SeriesDisplayOverride>
+            {
+                [serie] = new() { LineDisplayType = LineDisplayType.Area, FillOpacity = 0.15, StrokeOpacity = 1 }
+            }
+        };
+    }
+}
