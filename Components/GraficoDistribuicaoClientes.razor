@@ -1,0 +1,49 @@
+<DashboardCard Subtitulo="Por segmento" Titulo="Distribuição de Clientes">
+    <MudStack AlignItems="AlignItems.Center" Class="flex-grow-1" Justify="Justify.Center" Spacing="3">
+        <MudChart ChartLabels="_rotulos"
+                  ChartOptions="_opcoes"
+                  ChartSeries="_series"
+                  ChartType="ChartType.Donut"
+                  Height="200px"
+                  T="double"
+                  Width="200px"/>
+        <MudStack AlignItems="AlignItems.Center" Spacing="0">
+            <MudText Typo="Typo.h5">@DashboardData.TotalClientes.ToString("N0")</MudText>
+            <MudText Class="mud-text-secondary" Typo="Typo.caption">clientes no total</MudText>
+        </MudStack>
+        <MudStack Class="mud-width-full" Spacing="1">
+            @foreach (var segmento in DashboardData.SegmentosClientes)
+            {
+                <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="2">
+                    <MudIcon Color="@segmento.Cor" Icon="@Icons.Material.Filled.Circle" Size="Size.Small"/>
+                    <MudText Typo="Typo.body2">@segmento.Nome</MudText>
+                    <MudSpacer/>
+                    <MudText Class="mud-text-secondary" Typo="Typo.body2">@segmento.Percentual%</MudText>
+                </MudStack>
+            }
+        </MudStack>
+    </MudStack>
+</DashboardCard>
+
+@code {
+    private List<ChartSeries<double>> _series = new();
+    private string[] _rotulos = Array.Empty<string>();
+    private ChartOptions _opcoes = new();
+
+    protected override void OnInitialized()
+    {
+        var segmentos = DashboardData.SegmentosClientes;
+
+        // Rosca: uma unica serie, um valor por segmento.
+        var valores = segmentos.Select(s => (double)s.Percentual).ToArray();
+        _series = new() { new ChartSeries<double>(valores) { Name = "Clientes" } };
+        _rotulos = segmentos.Select(s => s.Nome).ToArray();
+
+        // A legenda e desenhada abaixo com MudStack, usando as mesmas cores do grafico.
+        _opcoes = new ChartOptions
+        {
+            ChartPalette = segmentos.Select(s => s.CorHex).ToArray(),
+            ShowLegend = false
+        };
+    }
+}

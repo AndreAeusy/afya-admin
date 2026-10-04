@@ -1,0 +1,41 @@
+<DashboardCard Subtitulo="Evolução mensal no ano" Titulo="Receita vs Meta">
+    <Menu>
+        <MudMenuItem Icon="@Icons.Material.Filled.Download">Exportar dados</MudMenuItem>
+        <MudMenuItem Icon="@Icons.Material.Filled.Refresh">Atualizar</MudMenuItem>
+    </Menu>
+    <ChildContent>
+        <MudChart ChartLabels="DashboardData.Meses"
+                  ChartOptions="_opcoes"
+                  ChartSeries="_series"
+                  ChartType="ChartType.Line"
+                  Height="320px"
+                  LegendPosition="Position.Bottom"
+                  T="double"
+                  Width="100%"/>
+    </ChildContent>
+</DashboardCard>
+
+@code {
+    private readonly ChartSeries<double> _receita = new(DashboardData.ReceitaMensal) { Name = "Receita" };
+    private readonly ChartSeries<double> _meta = new(DashboardData.MetaMensal) { Name = "Meta" };
+
+    private List<ChartSeries<double>> _series = new();
+    private LineChartOptions _opcoes = new();
+
+    protected override void OnInitialized()
+    {
+        _series = new() { _receita, _meta };
+
+        _opcoes = new LineChartOptions
+        {
+            ChartPalette = new[] { "#2563EB", "#7C3AED" },
+            LineStrokeWidth = 3,
+            YAxisToStringFunc = valor => $"R$ {valor / 1000:0}k",
+            SeriesDisplayOverrides = new Dictionary<IChartSeries, MudBlazor.Charts.SeriesDisplayOverride>
+            {
+                [_receita] = new() { LineDisplayType = LineDisplayType.Area, FillOpacity = 0.12, StrokeOpacity = 1 },
+                [_meta] = new() { LineDisplayType = LineDisplayType.Line, StrokeOpacity = 1 }
+            }
+        };
+    }
+}
