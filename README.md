@@ -1,5 +1,18 @@
 # afya-admin
 
+# Afya Admin — Dashboard com Blazor WebAssembly e MudBlazor
+
+## Identificação
+| | |
+|---|---|
+| **Aluno(a)** | André Vinícius de Souza |
+| **Matrícula** | Seu Número de Matrícula |
+| **Faculdade** | São Lucas Porto Velho |
+| **Curso** | Bacharelado em Ciência da Computação |
+| **Disciplina** | Programação para Sistemas Web |
+| **Professor(a)** | Nome do Professor(a) |
+| **Semestre** | 2026.2 |
+
 Dashboard administrativo feito com **Blazor WebAssembly (.NET 10)** e **MudBlazor 9**, sem nenhuma linha de CSS próprio.
 
 ## Como executar
