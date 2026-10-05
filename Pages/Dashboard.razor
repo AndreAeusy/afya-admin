@@ -4,6 +4,47 @@
 
 <MudContainer Class="py-4" MaxWidth="MaxWidth.ExtraLarge">
     <CabecalhoPagina Subtitulo="@Subtitulo" Titulo="Dashboard">
+        <SeletorPeriodo @bind-Valor="_periodo"/>
+    </CabecalhoPagina>
+
+    <MudGrid Spacing="3">
+        @foreach (var kpi in DashboardData.Kpis)
+        {
+            <MudItem lg="3" sm="6" xs="12">
+                <KpiCard Kpi="kpi"/>
+            </MudItem>
+        }
+
+        <MudItem lg="8" xs="12">
+            <GraficoReceita/>
+        </MudItem>
+        <MudItem lg="4" xs="12">
+            <GraficoDistribuicaoClientes/>
+        </MudItem>
+
+        <MudItem lg="5" xs="12">
+            <PerformanceProjetos/>
+        </MudItem>
+        <MudItem lg="7" xs="12">
+            <AtividadesRecentes/>
+        </MudItem>
+
+        <MudItem xs="12">
+            <ProjetosRecentes/>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private string _periodo = DashboardData.Periodos[1];
+
+    private string Subtitulo => $"Bem-vindo de volta, Alex! Mostrando: {_periodo.ToLowerInvariant()}.";
+}@page "/"
+
+<PageTitle>Dashboard - Afya Admin</PageTitle>
+
+<MudContainer Class="py-4" MaxWidth="MaxWidth.ExtraLarge">
+    <CabecalhoPagina Subtitulo="@Subtitulo" Titulo="Dashboard">
         <SeletorPeriodo Valor="@_periodo" ValorChanged="AtualizarPeriodo" />
     </CabecalhoPagina>
 
