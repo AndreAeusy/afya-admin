@@ -1,7 +1,27 @@
-<MudNavMenu Class="pa-2">
-    <MudNavLink Href="/" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Disabled="true" Icon="@Icons.Material.Filled.Folder">Projetos</MudNavLink>
-    <MudNavLink Disabled="true" Icon="@Icons.Material.Filled.PeopleAlt">Clientes</MudNavLink>
-    <MudNavLink Disabled="true" Icon="@Icons.Material.Filled.Description">Relatórios</MudNavLink>
-    <MudNavLink Disabled="true" Icon="@Icons.Material.Filled.Settings">Configurações</MudNavLink>
+<MudNavMenu>
+    <MudText Typo="Typo.subtitle2" Class="px-4 mt-4 mb-2 mud-text-secondary">Analytics</MudText>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+    <MudNavLink Href="/clientes" Icon="@Icons.Material.Filled.People">Clientes</MudNavLink>
+    
+    <MudNavLink Href="/projetos" Icon="@Icons.Material.Filled.Folder">
+        <div class="d-flex justify-space-between align-center w-100">
+            Projetos <MudChip T="string" Size="Size.Small" Color="Color.Primary" Class="ml-auto">8</MudChip>
+        </div>
+    </MudNavLink>
+    
+    <MudNavLink Href="/financeiro" Icon="@Icons.Material.Filled.AttachMoney">Financeiro</MudNavLink>
+    <MudNavLink Href="/relatorios" Icon="@Icons.Material.Filled.Description">Relatórios</MudNavLink>
+
+    <MudText Typo="Typo.subtitle2" Class="px-4 mt-4 mb-2 mud-text-secondary">Administração</MudText>
+    <MudNavLink Href="/usuarios" Icon="@Icons.Material.Filled.Person">Usuários</MudNavLink>
+    <MudNavLink Href="/permissoes" Icon="@Icons.Material.Filled.Security">Permissões</MudNavLink>
+    
+    <MudNavLink Href="/integracoes" Icon="@Icons.Material.Filled.Extension">
+        <div class="d-flex justify-space-between align-center w-100">
+            Integrações <MudChip T="string" Size="Size.Small" Color="Color.Primary" Class="ml-auto">Novo</MudChip>
+        </div>
+    </MudNavLink>
+    
+    <MudNavLink Href="/configuracoes" Icon="@Icons.Material.Filled.Settings">Configurações</MudNavLink>
+    <MudNavLink Href="/ajuda" Icon="@Icons.Material.Filled.HelpOutline">Ajuda</MudNavLink>
 </MudNavMenu>

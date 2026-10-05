@@ -1,50 +1,6 @@
-@page "/"
-
-<PageTitle>Dashboard - Afya Admin</PageTitle>
-
-<MudContainer Class="py-4" MaxWidth="MaxWidth.ExtraLarge">
-    <CabecalhoPagina Subtitulo="@Subtitulo" Titulo="Dashboard">
-        <SeletorPeriodo Valor="@_periodo" ValorChanged="AtualizarPeriodo" />
+<CabecalhoPagina Subtitulo="Visão geral da plataforma e indicadores de desempenho." Titulo="Dashboard">
+        <MudStack Row="true" Spacing="2" AlignItems="AlignItems.Center">
+            <SeletorPeriodo Valor="@_periodo" ValorChanged="AtualizarPeriodo" />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add">Novo Projeto</MudButton>
+        </MudStack>
     </CabecalhoPagina>
-
-    <MudGrid Spacing="3">
-        @foreach (var kpi in _kpisAtuais)
-        {
-            <MudItem lg="3" sm="6" xs="12">
-                <KpiCard Kpi="kpi"/>
-            </MudItem>
-        }
-
-        <MudItem lg="8" xs="12">
-            <GraficoReceita/>
-        </MudItem>
-        <MudItem lg="4" xs="12">
-            <GraficoDistribuicaoClientes/>
-        </MudItem>
-
-        <MudItem lg="5" xs="12">
-            <PerformanceProjetos/>
-        </MudItem>
-        <MudItem lg="7" xs="12">
-            <AtividadesRecentes/>
-        </MudItem>
-
-        <MudItem xs="12">
-            <ProjetosRecentes/>
-        </MudItem>
-    </MudGrid>
-</MudContainer>
-
-@code {
-    private string _periodo = DashboardData.Periodos[1];
-    
-    private List<Kpi> _kpisAtuais = DashboardData.Kpis;
-
-    private string Subtitulo => $"Bem-vindo de volta, Alex! Mostrando: {_periodo.ToLowerInvariant()}.";
-
-    private void AtualizarPeriodo(string novoPeriodo)
-    {
-        _periodo = novoPeriodo;
-        _kpisAtuais = DashboardData.ObterKpis(novoPeriodo);
-    }
-}
