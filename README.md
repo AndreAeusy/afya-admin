@@ -88,3 +88,127 @@ Toda a estilização foi feita aproveitando o sistema de temas (`MudTheme`) e as
 
 ### 8. Por que o namespace é `afya_admin` e não `afya-admin`?
 O C# não permite o uso do caractere de hífen `-` em identificadores de código (pois o compilador interpreta como operador de subtração). Por essa razão, o .NET substitui o hífen pelo caractere de sublinhado `_`, definindo o namespace padrão do projeto como `afya_admin`.
+
+Aqui tens o documento `README.md` completo, formatado exatamente com as marcações de títulos (`##`, `###`) e subtítulos que pediste, pronto a copiar e colar:
+
+```markdown
+# Afya Admin — Dashboard com Blazor WebAssembly e MudBlazor
+
+Painel administrativo desenvolvido para a disciplina de Programação para Sistemas Web, utilizando **Blazor WebAssembly (.NET 10)** e componentes **MudBlazor 9**. O projeto foi construído inteiramente com componentes prontos e classes utilitárias, sem a necessidade de escrever regras de CSS personalizadas.
+
+## Identificação
+
+| Campo | Dados do Aluno |
+| --- | --- |
+| **Aluno(a)** | André Vinícius de Souza |
+| **Matrícula** | *[Sua Matrícula]* |
+| **Faculdade** | São Lucas campus 2 Porto Velho |
+| **Curso** | Bacharelado em Ciência da Computação |
+| **Disciplina** | Programação para Sistemas Web |
+| **Professor(a)** | mestre liluyourd cury |
+| **Semestre** | 2026.2 |
+
+---
+
+## Como executar o projeto
+
+Para rodar a aplicação na sua máquina, certifique-se de ter o **.NET 10 SDK** instalado e siga os passos abaixo no terminal:
+
+```bash
+# Entre na pasta do projeto
+cd afya-admin
+
+# Restaure as dependências e inicie o servidor de desenvolvimento
+dotnet restore
+dotnet watch
+
+```
+
+Abra no navegador o endereço local fornecido pelo terminal (geralmente `https://localhost:xxxx`).
+
+---
+
+## Estrutura do Projeto
+
+A organização dos diretórios foi estruturada para separar claramente os dados da interface visual:
+
+```text
+afya-admin/
+├── Components/    componentes visuais reutilizáveis (cards, gráficos, tabelas) + Ui.cs
+├── Data/          modelos (records) e dados fictícios do dashboard
+├── Layout/        MainLayout (AppBar, Drawer, tema claro/escuro) e NavMenu
+├── Pages/         Dashboard (rota raiz "/") e página de erro NotFound
+├── wwwroot/       index.html, app.css global e assets/imagens
+└── docs/prints/   capturas de tela (tema-claro.png, tema-escuro.png, mobile.png, devtools.png)
+
+```
+
+---
+
+## Componentes Criados
+
+| Componente | Responsabilidade | Parâmetros Principais |
+| --- | --- | --- |
+| `CabecalhoPagina` | Exibe o título principal, subtítulo e ações no topo. | `Titulo`, `Subtitulo`, `Acoes` |
+| `SeletorPeriodo` | Menu suspenso para alternar o intervalo de exibição dos dados. | `Opcoes`, `Valor`, `ValorChanged` |
+| `DashboardCard` | Estrutura base de card reutilizável com cabeçalho, ações e menu de contexto. | `Titulo`, `Subtitulo`, `Acoes`, `Menu`, `ChildContent` |
+| `KpiCard` | Mostra os indicadores de desempenho com valores, variações e mini gráficos (*sparklines*). | `Kpi` |
+| `GraficoReceita` | Gráfico de linhas dinâmico comparando a Receita versus a Meta mensal. | `Meses`, `Receita`, `Meta` |
+| `GraficoDistribuicaoClientes` | Gráfico de rosca (*Donut*) com o total centralizado e legenda por segmento. | `Total`, `Segmentos` |
+| `PerformanceProjetos` | Lista de projetos com barras de progresso alinhadas e contagem de tarefas. | `Projetos` |
+| `AtividadesRecentes` | Feed em formato de timeline com as últimas ações realizadas na plataforma. | `Atividades` |
+| `ProjetosRecentes` | Tabela interativa com status em chips coloridos e progresso detalhado. | `Projetos` |
+
+---
+
+## Telas da Aplicação
+
+### Tema Claro
+
+### Tema Escuro
+
+### Versão Mobile
+
+### Inspeção no DevTools
+
+---
+
+## O que aprendi
+
+### 1. Como o Blazor WebAssembly inicia?
+
+O navegador carrega inicialmente o ficheiro `wwwroot/index.html`, que exibe uma animação de carregamento dentro da tag `<div id="app">`. Em seguida, o runtime do .NET compilado em WebAssembly descarrega as DLLs do projeto e executa o `Program.cs`. A linha `builder.RootComponents.Add<App>("#app")` substitui o carregamento inicial pela aplicação Blazor e ativa o sistema de rotas do `App.razor`.
+
+### 2. Qual a diferença entre Layout, Page e Component?
+
+* **Layout (`MainLayout.razor`):** Define a estrutura comum da interface que se mantém fixa entre as páginas, como o menu lateral (`MudDrawer`) e a barra superior (`MudAppBar`).
+* **Page (`Dashboard.razor`):** É o componente de nível de página associado a uma rota específica (`@page "/"`), servindo para organizar os blocos visuais.
+* **Component (`KpiCard.razor`):** Um elemento isolado, modular e reutilizável que recebe dados via parâmetros para renderizar partes específicas da tela.
+
+### 3. Para que serve o `RenderFragment`?
+
+O `RenderFragment` funciona como um "espaço reservado" (*slot*) que permite injetar blocos de marcação HTML ou outros componentes dentro de um componente reutilizável. O `DashboardCard` utiliza esse recurso no `ChildContent`, nas `Acoes` e no `Menu` para manter uma estrutura padrão sem engessar o conteúdo interno.
+
+### 4. Como funciona o `@bind-Valor` no `SeletorPeriodo`?
+
+O vínculo bidirecional (`@bind-Valor`) passa o valor atual para dentro do componente através do parâmetro `Valor`. Quando o utilizador escolhe uma nova opção no menu, o componente dispara o evento `ValorChanged.InvokeAsync(opcao)`, atualizando automaticamente a variável correspondente na página pai.
+
+### 5. Por que separar a pasta `Data`?
+
+Isolar os dados e modelos (*records*) na pasta `Data` separa a regra de negócio e a fonte de dados da camada visual. Isso torna o código mais limpo e facilita futuras manutenções, como a substituição dos dados estáticos por chamadas a uma API REST real utilizando `HttpClient`.
+
+### 6. Como a responsividade funciona no `MudGrid` (`xs`, `sm`, `lg`)?
+
+O `MudGrid` divide a largura do ecrã com base em um sistema de 12 colunas. Ao configurar propriedades como `xs="12" sm="6" lg="3"`, determinamos que o elemento ocupará a linha inteira em telemóveis (`12` colunas), metade do espaço em tablets (`6` colunas) e um quarto em monitores de desktop (`3` colunas).
+
+### 7. Como foi feita a estilização sem CSS e qual o papel do `MudTheme`?
+
+Toda a identidade visual foi construída utilizando o sistema de temas do framework (`MudTheme`) e classes utilitárias nativas (como `pa-4`, `d-flex` e `mud-text-secondary`). O `MudTheme` centraliza as paletas de cores para os modos claro e escuro, tipografia e espaçamentos, eliminando a necessidade de ficheiros de folha de estilo customizados.
+
+### 8. Por que o namespace é `afya_admin` e não `afya-admin`?
+
+A linguagem C# proíbe o uso de hífens (`-`) em identificadores de código, pois interpretaria o caractere como uma operação matemática de subtração. Por essa razão, o compilador substitui automaticamente hífens por sublinhados (`_`), definindo o namespace raiz do projeto como `afya_admin`.
+
+```
+
+```
