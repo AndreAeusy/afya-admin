@@ -6,11 +6,10 @@
 | | |
 |---|---|
 | **Aluno(a)** | André Vinícius de Souza |
-| **Matrícula** | Seu Número de Matrícula |
-| **Faculdade** | São Lucas Porto Velho |
+| **Faculdade** | São Lucas campus 2 Porto Velho |
 | **Curso** | Bacharelado em Ciência da Computação |
 | **Disciplina** | Programação para Sistemas Web |
-| **Professor(a)** | Nome do Professor(a) |
+| **Professor(a)** | mestre liluyourd cury |
 | **Semestre** | 2026.2 |
 
 Dashboard administrativo feito com **Blazor WebAssembly (.NET 10)** e **MudBlazor 9**, sem nenhuma linha de CSS próprio.
