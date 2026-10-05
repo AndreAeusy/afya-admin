@@ -56,4 +56,32 @@ public static class DashboardData
         new("Migração Cloud", Icons.Material.Outlined.Cloud, Color.Success, "CloudSystems", "Ana Martins", "Concluído", Color.Success, 100, "20 Set"),
         new("Sistema ERP", Icons.Material.Outlined.Storage, Color.Warning, "Alpha Group", "João Silva", "Em andamento", Color.Info, 48, "15 Out")
     };
+
+    // NOVO MÉTODO PARA O DESAFIO 3: Retorna números diferentes baseados no período
+    public static List<Kpi> ObterKpis(string periodo)
+    {
+        if (periodo == "Últimos 7 dias")
+        {
+            return new List<Kpi>
+            {
+                new("Receita", "R$ 58.200", "+3,1%", true, Icons.Material.Filled.AttachMoney, Color.Success, "#108981", new double[] { 5, 8, 7, 10, 11, 10, 14 }),
+                new("Usuários Ativos", "3.105", "+1,5%", true, Icons.Material.Filled.Groups, Color.Secondary, "#7C3AED", new double[] { 3, 5, 4, 6, 7, 8, 9 }),
+                new("Novos Clientes", "45", "-1,2%", false, Icons.Material.Filled.PeopleAlt, Color.Info, "#3882F6", new double[] { 8, 7, 5, 6, 4, 5, 3 }),
+                new("Projetos Ativos", "25", "+0,0%", true, Icons.Material.Filled.Folder, Color.Warning, "#F97316", new double[] { 10, 10, 11, 11, 12, 12, 12 }),
+            };
+        }
+        else if (periodo == "Últimos 90 dias")
+        {
+            return new List<Kpi>
+            {
+                new("Receita", "R$ 720.900", "+22,4%", true, Icons.Material.Filled.AttachMoney, Color.Success, "#108981", new double[] { 15, 20, 25, 30, 35, 40, 50 }),
+                new("Usuários Ativos", "28.500", "+15,3%", true, Icons.Material.Filled.Groups, Color.Secondary, "#7C3AED", new double[] { 10, 15, 18, 22, 28, 35, 40 }),
+                new("Novos Clientes", "1.250", "+30,1%", true, Icons.Material.Filled.PeopleAlt, Color.Info, "#3882F6", new double[] { 5, 10, 15, 20, 25, 30, 35 }),
+                new("Projetos Ativos", "35", "+5,4%", true, Icons.Material.Filled.Folder, Color.Warning, "#F97316", new double[] { 20, 22, 25, 28, 30, 32, 35 }),
+            };
+        }
+        
+        // Padrão: Últimos 30 dias e Personalizado
+        return Kpis;
+    }
 }
