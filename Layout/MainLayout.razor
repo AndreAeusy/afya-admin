@@ -1,44 +1,49 @@
 @inherits LayoutComponentBase
 
-<MudThemeProvider IsDarkMode="_isDarkMode" />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudThemeProvider @bind-IsDarkMode="_modoEscuro" Theme="_tema"/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
 <MudLayout>
-    <MudAppBar Elevation="1" Color="Color.Surface">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Default" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h6" Color="Color.Error" Class="mr-4"><b>Afya Pedagógico</b></MudText>
-        
-        <MudText Typo="Typo.body2" Class="mud-text-secondary ml-4 d-none d-md-block">Home / Dashboard</MudText>
-        
-        <MudSpacer />
-        
-        <MudTextField T="string" Placeholder="Pesquisar..." Variant="Variant.Outlined" Margin="Margin.Dense" 
-                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" 
-                      Class="d-none d-md-flex mt-2" Style="max-width: 400px;" />
-        
-        <MudSpacer />
-        
-        <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)" Color="Color.Default" OnClick="@DarkModeToggle" />
-        <MudBadge Content="3" Color="Color.Error" Overlap="true" Class="mx-2">
-            <MudIconButton Icon="@Icons.Material.Outlined.Notifications" Color="Color.Default" />
+    <MudAppBar Color="Color.Surface" Elevation="1">
+        <MudIconButton Color="Color.Default" Edge="Edge.Start" Icon="@Icons.Material.Filled.Menu" OnClick="AlternarMenu"/>
+        <MudText Class="mud-text-secondary ml-2 d-none d-md-block" Typo="Typo.body2">Home / Dashboard</MudText>
+        <MudSpacer/>
+        <MudTextField Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="d-none d-md-flex mt-2"
+                      Margin="Margin.Dense"
+                      Placeholder="Pesquisar..."
+                      T="string"
+                      Variant="Variant.Outlined"/>
+        <MudSpacer/>
+        <MudIconButton Color="Color.Default"
+                       Icon="@(_modoEscuro ? Icons.Material.Filled.LightMode : Icons.Material.Filled.DarkMode)"
+                       OnClick="AlternarTema"/>
+        <MudBadge Class="mx-2" Color="Color.Error" Content="3" Overlap="true">
+            <MudIconButton Color="Color.Default" Icon="@Icons.Material.Outlined.Notifications"/>
         </MudBadge>
-        
-        <div class="d-flex align-center ml-3">
+        <MudStack AlignItems="AlignItems.Center" Class="ml-3" Row="true" Spacing="2">
             <MudAvatar Color="Color.Primary" Size="Size.Small">AM</MudAvatar>
-            <div class="d-none d-md-flex flex-column ml-2">
-                <MudText Typo="Typo.body2"><b>Alex Morgan</b> <span style="color: #108981; font-size: 0.8em;">Online</span></MudText>
-                <MudText Typo="Typo.caption" Class="mud-text-secondary">alex.morgan@afya.com.br</MudText>
+            <div class="d-none d-md-block">
+                <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="1">
+                    <MudText Typo="Typo.body2"><strong>Alex Morgan</strong></MudText>
+                    <MudChip Color="Color.Success" Size="Size.Small" T="string" Variant="Variant.Text">Online</MudChip>
+                </MudStack>
+                <MudText Class="mud-text-secondary" Typo="Typo.caption">alex.morgan@afya.com.br</MudText>
             </div>
-        </div>
+        </MudStack>
     </MudAppBar>
 
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="1">
+    <MudDrawer @bind-Open="_menuAberto" Elevation="1">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6" Color="Color.Error"><b>Afya Pedagógico</b></MudText>
+            <MudStack AlignItems="AlignItems.Center" Row="true" Spacing="1">
+                <MudIcon Color="Color.Error" Icon="@Icons.Material.Filled.School"/>
+                <MudText Color="Color.Error" Typo="Typo.h6"><strong>Afya Pedagógico</strong></MudText>
+            </MudStack>
         </MudDrawerHeader>
-        <NavMenu />
+        <NavMenu/>
     </MudDrawer>
 
     <MudMainContent>
@@ -47,16 +52,41 @@
 </MudLayout>
 
 @code {
-    private bool _drawerOpen = true;
-    private bool _isDarkMode = false; // Começa no tema claro por padrão
+    private bool _menuAberto = true;
+    private bool _modoEscuro;
 
-    private void DrawerToggle()
+    private readonly MudTheme _tema = new()
     {
-        _drawerOpen = !_drawerOpen;
-    }
+        PaletteLight = new PaletteLight
+        {
+            Primary = "#2563EB",
+            Secondary = "#7C3AED",
+            Success = "#108981",
+            Info = "#3882F6",
+            Warning = "#F97316",
+            Background = "#F4F6FA",
+            Surface = "#FFFFFF",
+            AppbarBackground = "#FFFFFF",
+            AppbarText = "#1F2937",
+            DrawerBackground = "#FFFFFF",
+            HoverOpacity = 0.12
+        },
+        PaletteDark = new PaletteDark
+        {
+            Primary = "#60A5FA",
+            Secondary = "#A78BFA",
+            Success = "#34D399",
+            Info = "#60A5FA",
+            Warning = "#FB923C",
+            HoverOpacity = 0.16
+        },
+        LayoutProperties = new LayoutProperties { DefaultBorderRadius = "12px" },
+        Typography = new Typography
+        {
+            Default = new DefaultTypography { FontFamily = new[] { "Inter", "Roboto", "Helvetica", "Arial", "sans-serif" } }
+        }
+    };
 
-    private void DarkModeToggle()
-    {
-        _isDarkMode = !_isDarkMode;
-    }
+    private void AlternarMenu() => _menuAberto = !_menuAberto;
+    private void AlternarTema() => _modoEscuro = !_modoEscuro;
 }
