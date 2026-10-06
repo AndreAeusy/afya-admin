@@ -19,7 +19,7 @@
 - MudBlazor 9 (componentes, tema e classes utilitárias)
 - C# e Razor
 - Git e GitHub
-- terminal linux
+- usei o terminal linux
 
 ## Como executar
 
@@ -51,7 +51,6 @@ Depois, acesse o endereço local que aparecer no terminal (por exemplo, `http://
 
 ![Inspeção do HTML no DevTools](docs/prints/devtools.png)
 
-**[PREENCHER: qual componente você inspecionou, quais tags HTML o Blazor gerou a partir de MudPaper, MudStack e MudButton, e quais classes apareceram (mud-paper, mud-elevation-1, pa-4, d-flex...).]**
 
 ## Estrutura do projeto
 
