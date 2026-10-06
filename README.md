@@ -19,7 +19,7 @@
 - MudBlazor 9 (componentes, tema e classes utilitárias)
 - C# e Razor
 - Git e GitHub
-- usei o terminal linux
+- usei o terminal linux só para falar mesmo
 
 ## Como executar
 
@@ -116,10 +116,11 @@ O compilador do C# não aceita hífens (`-`) em nomes de namespace, porque enten
 
 ## Dificuldades e soluções
 
-Enfrentei dois desafios principais durante o desenvolvimento:
+Sendo bem sincero, enfrentei dois desafios principais onde acabei travando um pouco durante o desenvolvimento:
 
-1. **Atualização dos Gráficos no MudBlazor 9:** Quando fui montar os gráficos e os *sparklines* nos cards de KPI, percebi que muitos exemplos da internet não compilavam mais. A API do MudBlazor mudou bastante na versão 9 (passou a exigir tipos genéricos como `ChartSeries<double>` e removeu parâmetros antigos). A solução foi ler a fundo a documentação atualizada e montar as séries dentro do ciclo de vida `OnParametersSet`.
-2. **Alinhamento do Card de Performance:** No card "Performance dos Projetos", o conteúdo inicial não estava a preencher toda a altura disponível do card, deixando um "buraco" em branco no final. Para resolver isso sem usar CSS, apliquei as classes utilitárias de flexbox (`d-flex flex-column flex-grow-1`) nos containers, forçando as linhas dos projetos a dividirem o espaço vertical de forma igual.
+1. **Quebrando a cabeça com os gráficos (MudBlazor 9):** Quando fui tentar montar os gráficos e os *sparklines* dos KPIs, percebi que os códigos e exemplos que eu achava em tutoriais na internet simplesmente não compilavam. Acabei descobrindo que a API do MudBlazor mudou muito nessa versão 9 (agora eles exigem tipos genéricos, como `ChartSeries<double>`, e removeram vários parâmetros antigos). O jeito foi parar de pesquisar no Google, abrir a documentação oficial, ler a fundo e entender que eu precisava montar as séries de dados usando o ciclo de vida `OnParametersSet`.
+
+2. **O "buraco" no Card de Performance:** Quando terminei o card de "Performance dos Projetos", notei que a lista não preenchia a altura toda do card, deixando um espaço em branco feio sobrando na parte de baixo. Como a regra do trabalho era não criar regras de CSS de jeito nenhum, fiquei pensando em como alinhar aquilo. A sacada foi usar as próprias classes utilitárias de flexbox do framework (`d-flex flex-column flex-grow-1`) direto nas tags. Isso forçou o container a esticar as linhas e dividir o espaço vertical perfeitamente, resolvendo o problema só com o HTML.
 
 ## Melhorias futuras e desafios
 
