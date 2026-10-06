@@ -19,7 +19,7 @@
 - MudBlazor 9 (componentes, tema e classes utilitárias)
 - C# e Razor
 - Git e GitHub
-- usei o terminal linux só para falar mesmo
+- usei o meu terminal que linux só para falar mesmo
 
 ## Como executar
 
@@ -30,8 +30,10 @@ git clone https://github.com/AndreAeusy/afya-admin.git
 cd afya-admin
 dotnet watch
 ```
+O primeiro build restaura os pacotes necessários. Não é preciso instalar o template MudBlazor para executar este projeto já criado.
 
-Depois, acesse o endereço local que aparecer no terminal (por exemplo, `http://localhost:xxxx`). o link aparece pelo terminal
+Use a URL informada no terminal. Para selecionar explicitamente o perfil HTTP configurado no projeto:
+Depois, acesse o endereço local que aparecer no terminal  `http://localhost:5010/`esse e  o link aparece pelo terminal
 
 ## Telas
 
