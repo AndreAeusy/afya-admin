@@ -124,7 +124,10 @@ Sendo bem sincero, enfrentei dois desafios principais onde acabei travando um po
 
 ## Melhorias futuras e desafios
 
-**Desafio implementado: período funcional nos KPIs.** O `SeletorPeriodo` altera os quatro cards de KPI. A página chama `DashboardData.ObterKpis(periodo)`, que devolve a nova lista de dados correspondente àquele intervalo e atualiza a interface instantaneamente.
+**O desafio que consegui implementar:**
+Fiz questão de pôr o filtro de período a funcionar a sério nos KPIs. Agora, quando escolhemos uma opção no `SeletorPeriodo`, os quatro cards atualizam-se na hora. A página simplesmente chama o método `DashboardData.ObterKpis(periodo)`, que vai buscar a lista de dados correspondente àquele intervalo de tempo e atualiza a interface num piscar de olhos.
 
-**Melhorias para o futuro:**
-Num próximo passo, a evolução natural deste dashboard seria substituir os dados estáticos (mockados na pasta `Data`) por uma integração real com backend, utilizando a classe `HttpClient` para consumir dados de uma API REST. Também seria interessante usar o `localStorage` do navegador para salvar a preferência do utilizador pelo tema (Claro/Escuro), para que a página não volte ao tema padrão após um recarregamento.
+**O que gostava de implementar no futuro:**
+O próximo passo óbvio para este projeto seria acabar com os dados estáticos (aqueles que deixei "mockados" à mão na pasta `Data`) e ligar o dashboard a um backend a sério. A ideia seria usar a classe `HttpClient` para ir buscar dados reais a uma API REST. 
+
+Outra melhoria muito útil seria usar o `localStorage` do navegador para guardar a preferência de quem está a usar (se prefere o tema Claro ou Escuro). É um bocado frustrante recarregar a página e o tema voltar ao padrão do nada, por isso guardar essa escolha deixaria o projeto com um toque muito mais profissional!
